@@ -13,16 +13,16 @@ def calculate_score(stat_line):
     return (float(stat_line.points) + 1.2*float(rebounds) + 1.5*float(stat_line.assists) + 2*float(stat_line.blocks) + 2*float(stat_line.steals) - float(stat_line.turnovers))/float(stat_line.games_played)
 
 def update_player_price(url):
-    try:
         page = urllib2.urlopen(url)
         text = page.read()
-        soup = BeautifulSoup(text)
+        soup = BeautifulSoup(text, "lxml")
         data = str(soup.find('pre')).split('\n')[1:-1]
         for line in data:
-            line = line.split(';')
-            player_price[line[3]] = Decimal(sub(r'[^\d.]', '', line[6]))
-    except:
-        pass
+            try:
+                line = line.split(';')
+                player_price[line[3]] = Decimal(sub(r'[^\d.]', '', line[6]))
+            except:
+                continue
 
 def main():
     for stat_line in return_all_player_season_statistics(2015):
