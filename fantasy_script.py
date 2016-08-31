@@ -32,10 +32,9 @@ def main():
 
     update_player_price("http://rotoguru1.com/cgi-bin/hyday.pl?game=fd&mon=4&day=12&year=2016&scsv=1")
     update_player_price("http://rotoguru1.com/cgi-bin/hyday.pl?game=fd&mon=4&day=13&year=2016&scsv=1")
-    print player_price 
 
     for name in sorted(player_scores, key=player_scores.get, reverse=True)[:10]:
-        print name + " - " + str(player_scores[name])
+        print name + " - " + str(player_scores[name]) + " - " + str(player_price[name])
 
 if __name__ == "__main__":
     main()
